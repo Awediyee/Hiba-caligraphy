@@ -1,0 +1,308 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0D2B45;
+  --color-primary-dark: #07192A;
+  --color-secondary: #1E88E5;
+  --color-secondary-hover: #1565C0;
+  --color-light-blue: #E3F2FD;
+  --color-surface-bg: #F8FAFC;
+  --color-accent-gold: #CDAA7D;
+  --color-accent-gold-light: #DFCAAB;
+  --color-accent-gold-dark: #A58153;
+  --color-text-main: #1F2937;
+  --color-text-muted: #6B7280;
+  --color-border-subtle: #E5E7EB;
+
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-cairo: 'Cairo', sans-serif;
+  --font-tajawal: 'Tajawal', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-calligraphy: 'Aref Ruqaa', 'Tajawal', cursive;
+  --font-kufi: 'Reem Kufi', 'Cairo', sans-serif;
+
+  --radius-custom: 20px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-montserrat);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-surface-bg);
+    color: var(--color-text-main);
+    font-family: 'Montserrat', 'Cairo', 'Noto Naskh Arabic', 'Noto Sans Ethiopic', 'Tajawal', sans-serif;
+    overscroll-behavior-y: none;
+  }
+
+  /* English text: use Montserrat */
+  :lang(en) {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Arabic text: use Cairo + Noto Naskh Arabic */
+  :lang(ar) {
+    font-family: 'Cairo', 'Noto Naskh Arabic', 'Tajawal', sans-serif;
+    line-height: 1.9;
+  }
+
+  /* Amharic (Ethiopic) text */
+  :lang(am) {
+    font-family: 'Noto Sans Ethiopic', sans-serif;
+    line-height: 1.85;
+    letter-spacing: 0.01em;
+  }
+
+  /* Prevent text size inflation on orientation change */
+  * {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
+
+/* Custom Scrollbar — slim on all screens */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #0D2B45;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #CDAA7D;
+}
+
+/* Custom Utility Classes */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-nav-scrolled {
+  background: rgba(13, 43, 69, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(205, 170, 125, 0.2);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #DFCAAB 0%, #CDAA7D 50%, #9B7746 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.blue-gradient-text {
+  background: linear-gradient(135deg, #1E88E5 0%, #0D2B45 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-glow {
+  box-shadow: 0 10px 30px -5px rgba(205, 170, 125, 0.3);
+}
+
+.navy-card-shadow {
+  box-shadow: 0 20px 40px -15px rgba(13, 43, 69, 0.08);
+}
+
+.navy-card-shadow-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.navy-card-shadow-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px -15px rgba(13, 43, 69, 0.18), 0 0 20px rgba(205, 170, 125, 0.2);
+}
+
+.islamic-pattern-bg {
+  background-image: radial-gradient(rgba(205, 170, 125, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Floating animation keyframes */
+@keyframes softFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1deg);
+  }
+}
+
+.animate-soft-float {
+  animation: softFloat 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Amharic text utility — always uses Noto Sans Ethiopic */
+.font-ethiopic {
+  font-family: 'Noto Sans Ethiopic', sans-serif !important;
+}
+
+/* Arabic text utility */
+.font-arabic {
+  font-family: 'Cairo', 'Noto Naskh Arabic', 'Aref Ruqaa', sans-serif !important;
+}
+
+/* English text utility */
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* ── Ticker / Marquee ── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 70s linear infinite;
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.animate-marquee:hover { animation-play-state: paused; }
+
+/* ── Hero Art Animations (new design) ── */
+@keyframes inkDraw {
+  from { stroke-dashoffset: 1200; }
+  to   { stroke-dashoffset: 0; }
+}
+.animate-ink-draw {
+  stroke-dasharray: 1200;
+  animation: inkDraw 3.2s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes glyphDrift {
+  0%, 100% { transform: translateY(0) rotate(0deg);    opacity: 0.05; }
+  40%       { transform: translateY(-20px) rotate(4deg); opacity: 0.1;  }
+  70%       { transform: translateY(-8px) rotate(-2deg); opacity: 0.07; }
+}
+.animate-glyph-drift   { animation: glyphDrift 10s ease-in-out infinite; }
+.animate-glyph-drift-2 { animation: glyphDrift 13s ease-in-out 2.5s infinite; }
+.animate-glyph-drift-3 { animation: glyphDrift 8s  ease-in-out 5s infinite; }
+.animate-glyph-drift-4 { animation: glyphDrift 11s ease-in-out 1s infinite; }
+
+@keyframes slowRotateCw  { from { transform: rotate(0deg);    } to { transform: rotate(360deg);  } }
+@keyframes slowRotateCcw { from { transform: rotate(0deg);    } to { transform: rotate(-360deg); } }
+.animate-rotate-cw   { animation: slowRotateCw  44s linear infinite; }
+.animate-rotate-ccw  { animation: slowRotateCcw 34s linear infinite; }
+.animate-rotate-fast { animation: slowRotateCw  18s linear infinite; }
+
+@keyframes breatheOrb {
+  0%, 100% { opacity: 0.15; transform: scale(1);   }
+  50%       { opacity: 0.28; transform: scale(1.15); }
+}
+.animate-breathe-orb  { animation: breatheOrb 7s ease-in-out infinite; }
+.animate-breathe-orb2 { animation: breatheOrb 9s ease-in-out 2s infinite; }
+
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.animate-gold-shimmer {
+  background: linear-gradient(90deg, #DFCAAB 0%, #FFF8ED 35%, #CDAA7D 55%, #9B7746 80%, #DFCAAB 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 4s linear infinite;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-left  { animation: slideInLeft  0.9s cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-slide-right { animation: slideInRight 0.9s cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-fade-up     { animation: fadeInUp     0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+
+/* ── Hero Arabic Art Animations ── */
+
+/* SVG ink-draw stroke reveal */
+@keyframes inkDraw {
+  from { stroke-dashoffset: 1200; }
+  to   { stroke-dashoffset: 0;    }
+}
+.animate-ink-draw {
+  stroke-dasharray: 1200;
+  animation: inkDraw 3.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.animate-ink-draw-slow {
+  stroke-dasharray: 1200;
+  animation: inkDraw 5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Floating Arabic glyph drift */
+@keyframes glyphDrift {
+  0%   { transform: translateY(0)   rotate(0deg);   opacity: 0.06; }
+  33%  { transform: translateY(-18px) rotate(3deg);  opacity: 0.12; }
+  66%  { transform: translateY(-8px)  rotate(-2deg); opacity: 0.08; }
+  100% { transform: translateY(0)   rotate(0deg);   opacity: 0.06; }
+}
+.animate-glyph-drift   { animation: glyphDrift 9s ease-in-out infinite; }
+.animate-glyph-drift-2 { animation: glyphDrift 12s ease-in-out 2s infinite; }
+.animate-glyph-drift-3 { animation: glyphDrift 7.5s ease-in-out 4s infinite; }
+.animate-glyph-drift-4 { animation: glyphDrift 10s ease-in-out 1s infinite; }
+
+/* Slow rotate for geometric star rings */
+@keyframes slowRotateCw  { from { transform: rotate(0deg); }   to { transform: rotate(360deg);  } }
+@keyframes slowRotateCcw { from { transform: rotate(0deg); }   to { transform: rotate(-360deg); } }
+.animate-rotate-cw  { animation: slowRotateCw  40s linear infinite; }
+.animate-rotate-ccw { animation: slowRotateCcw 30s linear infinite; }
+.animate-rotate-cw-fast { animation: slowRotateCw 18s linear infinite; }
+
+/* Gold shimmer sweep on text/borders */
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.animate-gold-shimmer {
+  background: linear-gradient(90deg, #CDAA7D 0%, #FFF3DC 40%, #CDAA7D 60%, #9B7746 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 3.5s linear infinite;
+}
+
+/* Radial breathe for glow orbs */
+@keyframes breatheOrb {
+  0%, 100% { transform: scale(1);   opacity: 0.18; }
+  50%       { transform: scale(1.2); opacity: 0.3;  }
+}
+.animate-breathe-orb { animation: breatheOrb 6s ease-in-out infinite; }
+
+/* Tattoo reveal: scale + fade in */
+@keyframes revealScale {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+.animate-reveal-scale { animation: revealScale 1s cubic-bezier(0.16,1,0.3,1) forwards; }
